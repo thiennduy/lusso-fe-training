@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import type { NextPage } from "next"
 import React from "react"
 import { useUser } from "../hooks/user"
@@ -7,12 +6,10 @@ import styles from "../styles/header.module.css"
 import SearchIcon from "@mui/icons-material/Search"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
 import { Add } from "@mui/icons-material"
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person"
 import Image from "next/image"
-import ProductDetail from "./p/[slug]"
 
-const Home: NextPage = () => {
-  const { user, signOut } = useUser()
+const Header = () => {
 
   return (
     <React.Fragment>
@@ -20,6 +17,7 @@ const Home: NextPage = () => {
         <img
           className={styles.header__logo}
           src='https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_Header_Logo_530e4204-fa7a-4b61-86be-88ff8fb68cfb_300x@2x.png?v=1629497683'
+          alt='test'
         ></img>
         <Box className={styles.search__inputwrapper}>
           <InputBase className={styles.search__input} placeholder='Search...' />
@@ -47,23 +45,8 @@ const Home: NextPage = () => {
           <p className={styles.cart__text}>Cart</p>
         </Box>
       </Box>
-
-      <Box sx={{ flexGrow: 1 }} p={1}>
-        <h1>Hello, {user?.getUsername()}</h1>
-        <button onClick={() => signOut()}>Sign out</button>
-      </Box>
-      <Box>
-        <ProductDetail />
-      </Box>
-      <Box>
-        <Image
-          src='https://wallpaperaccess.com/full/4386066.jpg'
-          height='1000px'
-          width='1500px'
-        />
-      </Box>
     </React.Fragment>
   )
 }
 
-export default Home
+export default Header

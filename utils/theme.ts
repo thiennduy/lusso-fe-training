@@ -1,5 +1,4 @@
-import { createTheme, } from "@mui/material/styles";
-
+import { createTheme } from "@mui/material/styles"
 
 export const theme = createTheme({
   typography: {
@@ -9,7 +8,7 @@ export const theme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          fontSize: "1.2rem",
+          fontSize: "1.2rem"
         }
       }
     },
@@ -25,8 +24,8 @@ export const theme = createTheme({
     },
     MuiChip: {
       defaultProps: {
-        size: 'small'
+        size: "small"
       }
     }
-  },
-});
+  }
+})

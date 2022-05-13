@@ -1,0 +1,140 @@
+
+.header__inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 20px 150px;
+    position: relative;
+    background: black;
+    color: white;
+    justify-content: space-between;
+    border-bottom: 2px solid #464545;
+}
+.header__logo {
+    /* display: block; */
+    /* max-height: 130px; */
+    height: 100px;
+}
+.header__logo:hover {
+    cursor: pointer;
+    border: 1px solid white;
+}
+.search__input {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background: #121212;
+    flex: 1;
+    height: 45px;
+}
+.search__inputwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex: 1;
+    height: 45px;
+    border-radius: 3px;
+    margin: 0 20px;
+}
+.search__icon {
+    padding-left: 10px;
+    color: black;
+    background-color: white;
+    height: 45px;
+    width: 50px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+.account__wrapper {
+    padding: 0 30px;
+    position: relative;
+}
+    .account__wrapper::after {
+        content: "";
+        height: 35px;
+        width: 0.5px;
+        background-color: #af1091;
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+.account__action {
+    color: #af1091;
+    font-size: 15px;
+    margin: 0;
+}
+.account__manage {
+    font-weight: 700;
+    color: white;
+    font-size: 15px;
+    margin: 10px 0 0 0;
+}
+.account__icon {
+    display: none;
+}
+.cart__container {
+    margin-left: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-items: space-between;
+}
+.cart__icon {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+.cart__text {
+    font-size: 20px;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 1280px) {
+    .account__wrapper {
+        display: none;
+    }
+    .account__icon {
+        display: block;
+    }
+        .account__icon {
+            cursor: pointer;
+        }
+    .header__inner {
+        padding: 20px 20px;
+    }
+}
+@media screen and (max-width: 860px) {
+    .cart__text {
+        display: none;
+    }
+}
+@media screen and (max-width: 640px) {
+    .header__inner {
+        height: 90px;
+    }
+    .header__logo {
+        /* display: block; */
+        /* max-height: 130px; */
+        height: 70px;
+    }
+    .search__icon {
+        padding-left: 10px;
+        color: white;
+        background-color: black;
+        height: 45px;
+        width: 50px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        display: flex;
+        align-items: center;
+    }
+    .search__input {
+        visibility: hidden;
+    }
+}

@@ -1,14 +1,14 @@
 import "styles/main.css"
-
 import React from "react"
 import type { AppProps } from "next/app"
 import Head from "next/head"
-
+import Layout from "components/Layout"
 import Auth from "@aws-amplify/auth"
 import { RecoilRoot } from "recoil"
 import { SnackbarProvider } from "notistack"
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
+// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
@@ -50,15 +50,15 @@ const App: React.FC<AppProps> = ({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <SnackbarProvider>
-            <ErrorBoundary>
-              <AuthProvider>
-                {getLayout(<Component {...pageProps} />)}
-              </AuthProvider>
-            </ErrorBoundary>
-          </SnackbarProvider>
-        </LocalizationProvider>
+        <SnackbarProvider>
+          <ErrorBoundary>
+            <AuthProvider>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Layout>{getLayout(<Component {...pageProps} />)}</Layout>
+              </LocalizationProvider>
+            </AuthProvider>
+          </ErrorBoundary>
+        </SnackbarProvider>
       </ThemeProvider>
     </RecoilRoot>
   )

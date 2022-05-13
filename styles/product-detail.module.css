@@ -1,0 +1,233 @@
+.container__box {
+    display: flex;
+    position: relative;
+    width: 80vw;
+    justify-content: space-between;
+    background-color: black;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.product__name {
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+.imagebox {
+    margin-left: 0px;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 20px 10px;
+    background-color: #181616;
+    border: 1px solid #252525;
+    border-radius: 4px;
+    position: relative;
+    justify-content: space-around;
+    width: 48%;
+    height: 60vh;
+}
+.detailbox {
+    padding: 20px 20px;
+    margin-left: 50px;
+    background-color: #181616;
+    border: 1px solid #252525;
+    border-radius: 4px;
+    width: 48%;
+    position: sticky;
+    top: 0;
+    right: 0;
+}
+.imagelist {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.strengthImages {
+    /* margin-left: 20px; */
+    /* width: 30%; */
+    display: flex;
+    flex-wrap: wrap;
+}
+/* .big__image {
+    width: 500px;
+    height: 500px;
+    max-height: 80%;
+} */
+.network__icon {
+    margin: 10px 10px 0 0;
+    font-size: 30px;
+}
+    .network__icon:hover {
+        color: #5f5e5e;
+        cursor: pointer;
+    }
+.small__image {
+    margin-bottom: 20px;
+}
+.detail__save {
+    background-color: #cf0e0e;
+    color: white;
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+.detail__saveContent {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Option */
+
+
+.option {
+    width: 200px;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 2px solid #af1091;
+}
+
+.option__text {
+    font-size: 18px;
+    font-weight: 400;
+    color: #af1091;
+}
+.optionActive {
+    width: 200px;
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 50px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 2px solid #2b2828;
+}
+.textActive {
+    font-size: 18px;
+    font-weight: 400;
+    color: #646363;
+}
+
+
+/* Description */
+
+.description__title {
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 20px;
+}
+.description__content {
+    align-items: center;
+    line-height: 38px;
+    font-size: 16px;
+}
+.description__card {
+    padding: 20px;
+    background-color: #181616;
+    border: 1px solid #252525;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Price sale-off */
+.spec__title {
+    font-size: 18px;
+    color: white;
+}
+.price__saleoff {
+    font-size: 25px;
+    color: #cf0e0e;
+    margin: 0 10px;
+}
+.price__original {
+    font-size: 20px;
+    color: #646363;
+    text-decoration: line-through;
+}
+
+/* Quantity selector */
+
+.quantity__selector {
+    display: inline-block;
+    height: 50px;
+    margin-left: 20px;
+}
+.quantity__action {
+    background-color: #181616;
+    border: 1px solid #252525;
+    height: 100%;
+    width: 50px;
+    color: white;
+
+}
+.quantity__input {
+    height: 100%;
+    width: 50px;
+    text-align: center;
+    background-color: #181616;
+    color: white;
+    border: 1px solid #252525;
+}
+
+.addButton {
+    height: 50px;
+    margin-top: 20px;
+    color: white;
+    background-color: #1d1969;
+    border-radius: none;
+    width: 200px;
+    font-size: 15px;
+}
+.addButton:hover {
+    background-color: #18136e;
+}
+.descriptionWrapper {
+    margin-top: 50px;
+    width: 48%;
+}
+/* @media screen and (max-width: 980px) {
+    .container__box {
+        display: flex;
+        position: relative;
+        background-color: black;
+        flex-wrap: wrap;
+    }
+    .imagebox {
+        margin-left: 0px;
+        display: flex;
+        flex-wrap: nowrap;
+        padding: 20px 10px;
+        background-color: #181616;
+        border: 1px solid #252525;
+        border-radius: 4px;
+        position: relative;
+        justify-content: space-around;
+        width: 90%;
+        height: 60vh;
+    }
+    .descriptionWrapper {
+        margin-top: 50px;
+        width: 90%;
+    }
+    .detailbox {
+        padding: 20px 20px;
+        margin-left: 50px;
+        margin-top: 30px;
+        background-color: #181616;
+        border: 1px solid #252525;
+        border-radius: 4px;
+        width: 90%;
+        position: sticky; 
+        top: 0;
+        right: 0;
+    }
+} */
