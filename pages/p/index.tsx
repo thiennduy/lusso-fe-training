@@ -36,7 +36,7 @@ const columns: GridColumns = [
     renderCell: (row) => {
       return (
         <>
-          <Link href={`/products/${row.value}`}>
+          <Link href={`/products/${row.value}`} passHref>
             <p>Update</p>
           </Link>
           <button onClick={() => handleOnclick(row.value)}>Delete</button>

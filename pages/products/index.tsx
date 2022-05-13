@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { listProducts } from "services/products"
+import Container from "@mui/material/Container"
 import Pagination from "@mui/material/Pagination"
 import Link from "next/link"
 import {
@@ -36,7 +37,7 @@ const columns: GridColumns = [
     renderCell: (row) => {
       return (
         <>
-          <Link href={`/products/${row.value}`}>
+          <Link href={`/products/${row.value}`} passHref>
             <p>Update</p>
           </Link>
           <button onClick={() => handleOnclick(row.value)}>Delete</button>
@@ -61,7 +62,7 @@ function ProductPage({}: Props) {
   }, [pageNum, pageSize])
   console.log(products)
   return (
-    <div>
+    <Container sx={{ backgroundColor: "white", width: "100%" }}>
       <DataGridPro
         getRowId={(p: any) => p._id}
         columns={columns}
@@ -82,7 +83,7 @@ function ProductPage({}: Props) {
         onChange={handleChange}
         color='primary'
       />
-    </div>
+    </Container>
   )
 }
 

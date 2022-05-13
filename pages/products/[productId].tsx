@@ -120,7 +120,7 @@ export default function AddForm() {
     setValue("slug", slugify(watchName || " "))
   }, [watchName])
   return (
-    <Container>
+    <Container sx={{ backgroundColor: "white", width: "100%" }}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ImagesList name='images' />
