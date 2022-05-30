@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/formControl/RichText.js", "components/formControl/SlateComponent.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
+import { ReactComponentElement, useEffect, useState, memo } from "react"
+import * as React from "react"
 import axios from "axios"
+import Box from "@mui/material/Box"
 import { listProducts } from "services/products"
 import Container from "@mui/material/Container"
 import Pagination from "@mui/material/Pagination"
@@ -14,6 +16,9 @@ import {
   DataGridPro,
   GridColumns
 } from "@mui/x-data-grid-pro"
+import AddForm from "./[productId]"
+import Layout from "components/Layout"
+import { Button } from "@mui/material"
 
 type Props = {}
 const handleOnclick = async (id: any) => {
@@ -22,13 +27,15 @@ const handleOnclick = async (id: any) => {
 
 const columns: GridColumns = [
   {
-    field: "name",
+    field: "name.en",
+    headerName: "Name",
     width: 400,
     renderCell: (params) => {
-      return <Link href={"products/" + params.row._id}>{params.value.en}</Link>
+      // console.log(params)
+      return <Link href={"p/" + params.row.slug}>{params.row.name.en}</Link>
     }
   },
-  { field: "sku", width: 150 },
+  { field: "sku", width: 150, headerName: "Sku" },
   { field: "stockAvailability", width: 150 },
   {
     field: "_id",
@@ -38,53 +45,102 @@ const columns: GridColumns = [
       return (
         <>
           <Link href={`/products/${row.value}`} passHref>
-            <p>Update</p>
+            <Button sx={{ marginRight: "5px", border: "1px solid #2078db" }}>
+              Update
+            </Button>
           </Link>
-          <button onClick={() => handleOnclick(row.value)}>Delete</button>
+          <Button
+            sx={{ border: "1px solid #2078db" }}
+            onClick={() => handleOnclick(row.value)}
+          >
+            Delete
+          </Button>
         </>
       )
     }
   }
 ]
 
-function ProductPage({}: Props) {
+function ProductPage({ children }: any) {
   const [products, setProducts] = useState([])
   const [pageSize, setPageSize] = useState(5)
   const [pageNum, setPageNum] = useState(1)
+  const [filterModel, setFilterModel] = useState(undefined)
+  const filterProduct = async () => {
+    const res = await axios.post("admin/products/list", {
+      filterModel: filterModel
+    })
+    setPageNum(1)
+    return res.data.docs
+  }
+  useEffect(() => {
+    filterProduct().then((data) => setProducts(data))
+  }, [filterModel])
   const handleChange = (e: any, value: number) => {
     setPageNum(value)
   }
-  console.log(pageNum)
+  // console.log(pageNum)
   useEffect(() => {
     listProducts({ limit: pageSize, page: pageNum }).then((res) => {
+      // console.log(res)
       setProducts(res.docs)
     })
   }, [pageNum, pageSize])
   console.log(products)
   return (
-    <Container sx={{ backgroundColor: "white", width: "100%" }}>
-      <DataGridPro
-        getRowId={(p: any) => p._id}
-        columns={columns}
-        rows={products}
-        autoHeight
-        pageSize={pageSize}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        rowsPerPageOptions={[3, 5]}
-        checkboxSelection
-        pagination
-      />
-      <Link href='/products/new'>
-        <a>Add new product</a>
-      </Link>
-      <Pagination
-        count={10}
-        page={pageNum}
-        onChange={handleChange}
-        color='primary'
-      />
-    </Container>
+    <Box
+      sx={{
+        width: "100%",
+        minHeight: "1200px",
+        backgroundColor: "white",
+        position: "relative",
+        margin: "0px"
+      }}
+    >
+      <Container
+        sx={{
+          backgroundColor: "white",
+          width: "100%",
+          padding: "30px",
+          border: "1px solid black"
+        }}
+      >
+        <DataGridPro
+          getRowId={(p: any) => p._id}
+          columns={columns}
+          rows={products}
+          autoHeight
+          pageSize={pageSize}
+          filterMode='server'
+          filterModel={filterModel}
+          onFilterModelChange={(model: any) => {
+            console.log(model)
+            setFilterModel(model)
+          }}
+          onPageSizeChange={(newPageSize: any) => setPageSize(newPageSize)}
+          rowsPerPageOptions={[3, 5]}
+          checkboxSelection
+          pagination
+        />
+        <Button sx={{ margin: "10px 0", border: "1px solid #2078db" }}>
+          <Link href='/products/new'>
+            <a>Add new product</a>
+          </Link>
+        </Button>
+        <Link href={"/"} passHref>
+          <Button sx={{ marginLeft: "5px", border: "1px solid #2078db" }}>
+            Back to home page
+          </Button>
+        </Link>
+        <Pagination
+          count={7}
+          page={pageNum}
+          onChange={handleChange}
+          color='primary'
+        />
+      </Container>
+      <Box>{children}</Box>
+    </Box>
   )
 }
-
-export default ProductPage
+export default memo(ProductPage)

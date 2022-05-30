@@ -13,6 +13,7 @@ import {
   DataGridPro,
   GridColumns
 } from "@mui/x-data-grid-pro"
+import Layout from "components/Layout"
 
 type Props = {}
 const handleOnclick = async (id: any) => {
@@ -85,5 +86,4 @@ function ProductPage({}: Props) {
     </div>
   )
 }
-
 export default ProductPage

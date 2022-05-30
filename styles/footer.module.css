@@ -13,7 +13,7 @@
     width: 80vw;
     margin: 50px auto;
 }
-    .strengthContainer::after {
+    /* .strengthContainer::after {
         content: "";
         height: 0.5px;
         width: 80vw;
@@ -21,7 +21,7 @@
         display: block;
         position: absolute;
         bottom: -750px;
-    }
+    } */
 .strengthText {
     font-size: 18px;
     color: white;
@@ -36,7 +36,8 @@
     display: flex;
     width: 80vw;
     margin: 0 auto;
-    margin-top: 120px;
+    padding-top: 40px;
+    border-top: 1px solid rgb(138, 137, 137);
 }
 
 .footerInfo {
@@ -47,6 +48,15 @@
     /* flex: 1 0 auto; */
     padding-left: 60px;
 }
+.footerText { 
+    color: white;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+    .footerText:hover {
+        color: rgb(172, 165, 165);
+        cursor: pointer;
+    }
 
 .contactText {
     color: white;
@@ -68,6 +78,7 @@
     justify-content: space-between;
     width: 80vw;
     margin: 40px auto;
+    padding-bottom: 50px;
 }
 .paymentList > svg {
     margin-right: 5px;

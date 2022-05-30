@@ -6,33 +6,69 @@ import Button from "@mui/material/Button"
 import TwitterIcon from "@mui/icons-material/Twitter"
 import PinterestIcon from "@mui/icons-material/Pinterest"
 import EmailIcon from "@mui/icons-material/Email"
-// import { NewProductFieldSchema } from "types/products"
 import styles from "styles/product-detail.module.css"
 import axios from "axios"
+import Serialize from "components/formControl/Serialize"
+import escapeHtml from "escape-html"
+import { Text, Node, Transforms, Element } from "slate"
 
-// type ProductDetailPropsType = {
-//   data: NewProductFieldSchema
-// }
 const strengthImage = [
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-01.png?v=1629845765",
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-02.png?v=1629845765",
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-03.png?v=1629845765",
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-04.png?v=1629845765g"
 ]
+const serialize = (node: any) => {
+  if (Text.isText(node)) {
+    let string = escapeHtml(node.text)
+    if (node?.bold) {
+      string = `<strong>${string}</strong>`
+    } else if (node?.italic) {
+      string = `<i>${string}</i>`
+    } else if (node?.underline) {
+      string = `<u>${string}</u>`
+    } else if (node?.code) {
+      string = `<code><${string}></code>`
+    }
+    return string
+  }
+
+  const children = node.children?.map((n: any) => serialize(n)).join("")
+
+  switch (node.type) {
+    case "quote":
+      return `<blockquote><p>${children}</p></blockquote>`
+    case "paragraph":
+      return `<p>${children}</p>`
+    case "link":
+      return `<a href="${escapeHtml(node.url)}">${children}</a>`
+    case "heading-one":
+      return `<h1>${children}</h1>`
+    case "heading-two":
+      return `<h2>${children}</h2>`
+    default:
+      return children
+  }
+}
 
 function ProductDetail(props: any) {
-  const [bigImage, setBigImage] = React.useState({})
-  const [value, setValue] = React.useState(1)
   const { data } = props
-  const images = data.images
-  React.useEffect(() => setBigImage(images.shift()), [])
+
+  const images = data?.images
+  const [bigImage, setBigImage] = React.useState({
+    host: images[0].host,
+    key: images[0].key
+  })
+  const [value, setValue] = React.useState(data.quantity ? data.quantity : 0)
+  console.log(data)
+  console.log(images[0])
   const handleIncrease = () => {
     setValue(value + 1)
   }
   const handleDecrease = () => {
     setValue(value - 1)
   }
-
+  const save = data.originalPrice - data.specialPrice
   return (
     <>
       <Box
@@ -54,14 +90,23 @@ function ProductDetail(props: any) {
                 <Box className={styles.imagelist}>
                   {images &&
                     images.map((item: any, index: number) => (
-                      <Image
-                        className={styles.small__image}
-                        src={item.host + item.key}
+                      <Box
+                        className={`${styles.small__image}
+                      ${
+                        item.key === bigImage?.key ? styles.active__image : ""
+                      }`}
                         key={index}
-                        height='70px'
-                        width='70px'
-                        alt='item images'
-                      />
+                      >
+                        <Image
+                          src={item.host + item.key}
+                          height='80px'
+                          width='80px'
+                          alt='item images'
+                          onClick={() =>
+                            setBigImage({ host: item.host, key: item.key })
+                          }
+                        />
+                      </Box>
                     ))}
                 </Box>
                 {bigImage?.host && (
@@ -80,7 +125,7 @@ function ProductDetail(props: any) {
                 </Typography>
                 <Box className={styles.detail__save}>
                   <Typography className={styles.detail__saveContent}>
-                    Save 40%
+                    Save ${save}
                   </Typography>
                 </Box>
                 <Box className={styles.network__list}>
@@ -89,14 +134,14 @@ function ProductDetail(props: any) {
                   <PinterestIcon className={styles.network__icon} />
                   <EmailIcon className={styles.network__icon} />
                 </Box>
-                <Typography>
+                <Typography className={styles.description__content}>
                   FREE delivery between Friday, May. 27 and Thursday, Jun.
                   02.Select Lighting Options: Non-Lit (NO RGB) +$0.00
                 </Typography>
-                <Typography>
+                <Typography className={styles.description__content}>
                   Order within 14 hours, 46 minutes and 53 seconds
                 </Typography>
-                <Typography>
+                <Typography className={styles.description__content}>
                   Select Lighting Options: Non-Lit (NO RGB) +$0.00
                 </Typography>
                 <Box className={(styles.option, styles.optionActive)}>
@@ -111,10 +156,14 @@ function ProductDetail(props: any) {
                     17.5 x 36 inches
                   </Typography>
                 </Box>
-                <Box sx={{ marginTop: "20px" }}>
+                <Box sx={{ marginTop: "10px" }}>
                   <span className={styles.spec__title}>Price:</span>
-                  <span className={styles.price__saleoff}>$35.89</span>
-                  <span className={styles.price__original}>%59.79</span>
+                  <span className={styles.price__saleoff}>
+                    ${data.specialPrice}
+                  </span>
+                  <span className={styles.price__original}>
+                    ${data.originalPrice}
+                  </span>
                 </Box>
                 <Box sx={{ marginTop: "20px" }}>
                   <span className={styles.spec__title}>Quantity:</span>
@@ -141,11 +190,10 @@ function ProductDetail(props: any) {
               <Box className={styles.descriptionWrapper}>
                 <Box className={styles.strengthImages}>
                   {strengthImage.map((item, index) => (
-                    <Image
+                    <img
                       src={item}
                       key={index}
-                      height='98px'
-                      width='320px'
+                      className={styles.strengthImage}
                       alt='index'
                     />
                   ))}
@@ -154,31 +202,30 @@ function ProductDetail(props: any) {
                   <Typography className={styles.description__title}>
                     Description
                   </Typography>
-                  <Typography className={styles.description__content}>
-                    Our "Scrollable Wooden Magnetic Hanger Art" is a
-                    contemporary, innovative, and aesthetic way to showcase your
-                    favorite custom artworks or photos. Your customized artworks
-                    or photos will be printed on our Double-White Popup material
-                    using UV inks and framed with natural solid magnetic wood
-                    bars, which guarantees no erosion/tearing over decades, easy
-                    storage, and portability. This is a cost-effective and
-                    long-lasting hanger art solution that allows you to scroll,
-                    clean, and carry to wherever you want. Quick assembly
-                    required.
-                  </Typography>
-                  <Typography className={styles.description__content}>
-                    What is included:
-                  </Typography>
-                  <Typography className={styles.description__content}>
-                    + Custom Print Scrollable Wooden Magnetic Hanger Art in
-                    matte finish.
-                  </Typography>
-                  <Typography className={styles.description__content}>
-                    (Thickness: 0.36 mm or 0.014 inches)
-                  </Typography>
-                  <Typography className={styles.description__content}>
-                    + Sizes available: 17.5 x 24 inches and 17.5 x 36 inches.
-                  </Typography>
+                  <Box>
+                    <Serialize styles={styles} value={data.description} />
+                  </Box>
+                  <Box
+                    sx={{
+                      borderTop: "1px solid #8a8989",
+                      paddingTop: "10px",
+                      marginTop: "10px"
+                    }}
+                  >
+                    <Typography className={styles.description__content}>
+                      What is included:
+                    </Typography>
+                    <Typography className={styles.description__content}>
+                      + Custom Print Scrollable Wooden Magnetic Hanger Art in
+                      matte finish.
+                    </Typography>
+                    <Typography className={styles.description__content}>
+                      (Thickness: 0.36 mm or 0.014 inches)
+                    </Typography>
+                    <Typography className={styles.description__content}>
+                      + Sizes available: 17.5 x 24 inches and 17.5 x 36 inches.
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
             </Box>

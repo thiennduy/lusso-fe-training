@@ -48,6 +48,11 @@
     /* width: 30%; */
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+}
+.strengthImage {
+    width: 50%;
+    height: auto;
 }
 /* .big__image {
     width: 500px;
@@ -63,17 +68,24 @@
         cursor: pointer;
     }
 .small__image {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+    /* height: auto; */
+    height: 80px;
+    width: 80px;
+}
+.active__image {
+    border: 2px solid #af1091;
 }
 .detail__save {
     background-color: #cf0e0e;
     color: white;
-    width: 80px;
+    width: 90px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 3px;
+    margin: 5px 0;
 }
 .detail__saveContent {
     font-size: 15px;
@@ -85,7 +97,7 @@
 
 .option {
     width: 200px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 20px;
     height: 50px;
     display: inline-flex;
@@ -102,7 +114,7 @@
 }
 .optionActive {
     width: 200px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-right: 20px;
     height: 50px;
     display: inline-flex;
@@ -193,43 +205,19 @@
     background-color: #18136e;
 }
 .descriptionWrapper {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     width: 48%;
 }
-/* @media screen and (max-width: 980px) {
-    .container__box {
-        display: flex;
-        position: relative;
-        background-color: black;
-        flex-wrap: wrap;
-    }
-    .imagebox {
-        margin-left: 0px;
-        display: flex;
-        flex-wrap: nowrap;
-        padding: 20px 10px;
-        background-color: #181616;
-        border: 1px solid #252525;
-        border-radius: 4px;
-        position: relative;
-        justify-content: space-around;
-        width: 90%;
-        height: 60vh;
-    }
-    .descriptionWrapper {
-        margin-top: 50px;
-        width: 90%;
-    }
+@media screen and (max-width: 1562px) {
     .detailbox {
         padding: 20px 20px;
-        margin-left: 50px;
-        margin-top: 30px;
         background-color: #181616;
         border: 1px solid #252525;
         border-radius: 4px;
-        width: 90%;
-        position: sticky; 
+        width: 48%;
+        position: relative;
+        margin-left: 0;
         top: 0;
         right: 0;
     }
-} */
+}

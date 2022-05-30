@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useCallback } from "react"
 import PropTypes, { InferProps } from "prop-types"
 import {
   Controller,
@@ -6,10 +6,15 @@ import {
   useController,
   useFieldArray
 } from "react-hook-form"
-import { Button, TextField } from "@mui/material"
+import { Button, TextField, Typography } from "@mui/material"
 import ImageList from "@mui/material/ImageList"
 import ImageListItem from "@mui/material/ImageListItem"
 import axios from "axios"
+import { useDrag, useDrop } from "react-dnd"
+import type { Identifier, XYCoord } from "dnd-core"
+import ImageItem from "./ImageItem"
+import { color } from "@mui/system"
+
 type ProductImagesPropsSchema = {
   name: string
 }
@@ -22,7 +27,7 @@ function ImagesList(props: ProductImagesPropsSchema) {
       headers: { "Content-Type": "multipart/formdata" }
     })
   }
-  const { fields, append } = useFieldArray({ name })
+  const { fields, append, swap } = useFieldArray({ name })
   const { register, getValues, setValue } = useFormContext()
 
   const onAddImage = async () => {
@@ -37,20 +42,24 @@ function ImagesList(props: ProductImagesPropsSchema) {
       console.log(error)
     }
   }
+  const handleSwap = useCallback((dragIndex: number, hoverIndex: number) => {
+    swap(dragIndex, hoverIndex)
+  }, [])
   return (
     <>
       <input type='file' multiple accept='image/*' {...register("image")} />
-      <Button onClick={onAddImage}>Add image</Button>
+      <Button onClick={onAddImage} sx={{ border: "2px solid #208be6" }}>
+        Add image
+      </Button>
       <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
         {fields?.map((item: any, index) => (
-          <ImageListItem key={item._id}>
-            <img
-              src={item.host + item.key}
-              srcSet={item.host + item.key}
-              alt={item.index}
-              loading='lazy'
-            />
-          </ImageListItem>
+          <ImageItem
+            item={item}
+            index={index}
+            key={item._id}
+            id={item.id}
+            handleSwap={handleSwap}
+          />
         ))}
       </ImageList>
     </>

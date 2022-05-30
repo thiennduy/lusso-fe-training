@@ -40,7 +40,7 @@ const App: React.FC<AppProps> = ({
   Component,
   pageProps
 }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout || ((page) => page)
 
   return (
     <RecoilRoot>

@@ -3,7 +3,7 @@ import { useUser } from "../hooks/user"
 import { Box, InputBase, Typography } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
-import { Add } from "@mui/icons-material"
+import { Add, QueryBuilder } from "@mui/icons-material"
 import PinterestIcon from "@mui/icons-material/Pinterest"
 import FacebookIcon from "@mui/icons-material/Facebook"
 import TwitterIcon from "@mui/icons-material/Twitter"
@@ -12,6 +12,26 @@ import YouTubeIcon from "@mui/icons-material/YouTube"
 import PersonIcon from "@mui/icons-material/Person"
 import Image from "next/image"
 import styles from "../styles/footer.module.css"
+import { useRouter } from "next/router"
+
+const footerShopLink = [
+  "Customize Your Own",
+  "New Releases",
+  "Best Sellers",
+  "AIO Covers",
+  "RGB GPU Backplates",
+  "RGB Support Brackets",
+  "LED Signs"
+]
+const footerInformationLink = [
+  "About Us",
+  "FAQ",
+  "Shipping & Returns",
+  "Terms & Conditions",
+  "Privacy Policy",
+  "Contact Us",
+  "Tracking Your Order"
+]
 
 const Footer = () => {
   return (
@@ -136,12 +156,12 @@ const Footer = () => {
           <Typography
             sx={{ color: "white", fontWeight: "500", marginBottom: "10px" }}
           >
-            1-714-603-7760
+            091 494 5809
           </Typography>
           <Typography
             sx={{ color: "white", fontWeight: "500", marginBottom: "10px" }}
           >
-            info@knightowllabs.com
+            info@lussoenterprise.com
           </Typography>
           <Typography sx={{ color: "white" }}>
             Mon-Fri 10AM-5PM (PST)
@@ -158,41 +178,11 @@ const Footer = () => {
           >
             SHOP
           </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Customize Your Own
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            New Releases
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Best Sellers
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            AIO Covers
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            RGB GPU Backplates
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            RGB Support Brackets
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            LED Signs
-          </Typography>
+          {footerShopLink.map((text, index) => (
+            <Typography key={index} className={styles.footerText}>
+              {text}
+            </Typography>
+          ))}
         </Box>
         <Box className={styles.footerLinks}>
           <Typography
@@ -205,47 +195,17 @@ const Footer = () => {
           >
             INFORMATION
           </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            About Us
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            FAQ
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Shipping & Returns
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Terms & Conditions
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Privacy Policy
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Contact Us
-          </Typography>
-          <Typography
-            sx={{ color: "white", marginBottom: "20px", fontSize: "16px" }}
-          >
-            Tracking Your Order
-          </Typography>
+          {footerInformationLink.map((text, index) => (
+            <Typography key={index} className={styles.footerText}>
+              {text}
+            </Typography>
+          ))}
         </Box>
       </Box>
       <Box className={styles.contactContainer}>
         <Box>
           <Typography className={styles.contactText}>
-            © 2022 Knight Owl Labs Powered by Shopify
+            © 2022 Lusso Enterprise Powered by Shopify
           </Typography>
         </Box>
         <Box>

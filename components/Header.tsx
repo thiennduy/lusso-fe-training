@@ -1,16 +1,13 @@
-import type { NextPage } from "next"
 import React from "react"
-import { useUser } from "../hooks/user"
 import { Box, InputBase } from "@mui/material"
 import styles from "../styles/header.module.css"
 import SearchIcon from "@mui/icons-material/Search"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
-import { Add } from "@mui/icons-material"
 import PersonIcon from "@mui/icons-material/Person"
-import Image from "next/image"
+import { useRouter } from "next/router"
 
 const Header = () => {
-
+  const router = useRouter()
   return (
     <React.Fragment>
       <Box className={styles.header__inner}>
