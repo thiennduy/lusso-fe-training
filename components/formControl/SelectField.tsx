@@ -13,7 +13,7 @@ type SelectFieldPropsSchema = {
   }[]
 }
 
-export function SelectField(props: SelectFieldPropsSchema) {
+export default function SelectField(props: SelectFieldPropsSchema) {
   const { name, label, disabled, options } = props
   const {
     field: { value, onChange },

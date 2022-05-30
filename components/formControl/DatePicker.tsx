@@ -13,7 +13,7 @@ type DateTimePickerFieldPropsSchema = {
   disabled?: boolean
 }
 
-function DateTimePickerField(props: DateTimePickerFieldPropsSchema) {
+function DatePicker(props: DateTimePickerFieldPropsSchema) {
   const { name, label, disabled } = props
 
   const {
@@ -40,4 +40,4 @@ function DateTimePickerField(props: DateTimePickerFieldPropsSchema) {
   )
 }
 
-export default React.memo(DateTimePickerField)
+export default React.memo(DatePicker)

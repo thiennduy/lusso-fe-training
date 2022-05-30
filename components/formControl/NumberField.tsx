@@ -9,7 +9,7 @@ type InputFieldPropsSchema = {
   disabled?: boolean
 }
 
-export function NumberField(props: InputFieldPropsSchema) {
+export default function NumberField(props: InputFieldPropsSchema) {
   const { name, label, disabled } = props
   const {
     field: { value, onChange },

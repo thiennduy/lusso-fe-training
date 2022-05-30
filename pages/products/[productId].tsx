@@ -4,21 +4,26 @@ import { useState, useEffect, useCallback } from "react"
 import axios from "axios"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
-import InputField from "components/formControl/InputField"
-import { SelectField } from "components/formControl/SelectField"
-import { NumberField } from "components/formControl/NumberField"
-import InputSlug from "components/formControl/InputSlug"
-import BrandName from "components/formControl/BrandName"
+import {
+  InputField,
+  BrandName,
+  DatePicker,
+  ImageItem,
+  ImagesList,
+  InputSlug,
+  NumberField,
+  RichText,
+  SelectField,
+  Serialize
+} from "components/formControl/index"
+
 import { useRouter } from "next/router"
-import DateTimePickerField from "components/formControl/DatePicker"
-import ImagesList from "components/formControl/ImagesList"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import ProductPage from "./index"
 import ProductLayout from "components/ProductLayout"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import RichText from "components/formControl/RichText"
 import { BorderRight } from "@mui/icons-material"
 import { Button } from "@mui/material"
 
@@ -226,7 +231,7 @@ function AddForm() {
             </Box>
             <Box sx={{ margin: "20px 10px" }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateTimePickerField
+                <DatePicker
                   name='specialPriceDateRange'
                   label='Sale-off date'
                 />

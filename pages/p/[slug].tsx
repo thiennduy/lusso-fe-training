@@ -1,5 +1,5 @@
-import { Box, Container, Grid, Typography } from "@mui/material"
-import React from "react"
+import { Box, Typography } from "@mui/material"
+import { useState } from "react"
 import Image from "next/image"
 import FacebookIcon from "@mui/icons-material/Facebook"
 import Button from "@mui/material/Button"
@@ -8,9 +8,9 @@ import PinterestIcon from "@mui/icons-material/Pinterest"
 import EmailIcon from "@mui/icons-material/Email"
 import styles from "styles/product-detail.module.css"
 import axios from "axios"
-import Serialize from "components/formControl/Serialize"
 import escapeHtml from "escape-html"
 import { Text, Node, Transforms, Element } from "slate"
+import { sanitize } from "components/hocs/sanitize"
 
 const strengthImage = [
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-01.png?v=1629845765",
@@ -53,20 +53,24 @@ const serialize = (node: any) => {
 
 function ProductDetail(props: any) {
   const { data } = props
-
+  // console.log(DOMPurify)
+  const descriptionString = data.description.reduce((accum: any, html: any) => {
+    accum = accum + serialize(html)
+    return accum
+  }, "")
   const images = data?.images
-  const [bigImage, setBigImage] = React.useState({
+  const [bigImage, setBigImage] = useState({
     host: images[0].host,
     key: images[0].key
   })
-  const [value, setValue] = React.useState(data.quantity ? data.quantity : 0)
-  console.log(data)
-  console.log(images[0])
+  const [value, setValue] = useState(data.quantity ? data.quantity : 0)
   const handleIncrease = () => {
     setValue(value + 1)
   }
   const handleDecrease = () => {
-    setValue(value - 1)
+    if (value > 0) {
+      setValue(value - 1)
+    }
   }
   const save = data.originalPrice - data.specialPrice
   return (
@@ -156,7 +160,7 @@ function ProductDetail(props: any) {
                     17.5 x 36 inches
                   </Typography>
                 </Box>
-                <Box sx={{ marginTop: "10px" }}>
+                <Box sx={{ marginTop: "15px" }}>
                   <span className={styles.spec__title}>Price:</span>
                   <span className={styles.price__saleoff}>
                     ${data.specialPrice}
@@ -202,12 +206,15 @@ function ProductDetail(props: any) {
                   <Typography className={styles.description__title}>
                     Description
                   </Typography>
-                  <Box>
-                    <Serialize styles={styles} value={data.description} />
-                  </Box>
+                  <Box
+                    dangerouslySetInnerHTML={{
+                      __html: sanitize(descriptionString)
+                    }}
+                    className={styles.description__content}
+                  ></Box>
                   <Box
                     sx={{
-                      borderTop: "1px solid #8a8989",
+                      borderTop: "1.5px solid #c2b9b9",
                       paddingTop: "10px",
                       marginTop: "10px"
                     }}
