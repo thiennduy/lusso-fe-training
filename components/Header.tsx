@@ -8,10 +8,14 @@ import { useRouter } from "next/router"
 
 const Header = () => {
   const router = useRouter()
+  const handleClick = () => {
+    router.push("/products")
+  }
   return (
     <React.Fragment>
       <Box className={styles.header__inner}>
         <img
+          onClick={handleClick}
           className={styles.header__logo}
           src='https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_Header_Logo_530e4204-fa7a-4b61-86be-88ff8fb68cfb_300x@2x.png?v=1629497683'
           alt='test'

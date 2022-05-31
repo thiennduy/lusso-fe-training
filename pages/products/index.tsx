@@ -45,12 +45,18 @@ const columns: GridColumns = [
       return (
         <>
           <Link href={`/products/${row.value}`} passHref>
-            <Button sx={{ marginRight: "5px", border: "1px solid #2078db" }}>
+            <Button
+              sx={{
+                marginRight: "5px",
+                border: "1px solid #2078db",
+                textTransform: "none"
+              }}
+            >
               Update
             </Button>
           </Link>
           <Button
-            sx={{ border: "1px solid #2078db" }}
+            sx={{ border: "1px solid #2078db", textTransform: "none" }}
             onClick={() => handleOnclick(row.value)}
           >
             Delete
@@ -122,13 +128,25 @@ function ProductPage({ children }: any) {
           checkboxSelection
           pagination
         />
-        <Button sx={{ margin: "10px 0", border: "1px solid #2078db" }}>
+        <Button
+          sx={{
+            margin: "10px 0",
+            border: "1px solid #2078db",
+            textTransform: "none"
+          }}
+        >
           <Link href='/products/new'>
             <a>Add new product</a>
           </Link>
         </Button>
         <Link href={"/"} passHref>
-          <Button sx={{ marginLeft: "5px", border: "1px solid #2078db" }}>
+          <Button
+            sx={{
+              marginLeft: "5px",
+              border: "1px solid #2078db",
+              textTransform: "none"
+            }}
+          >
             Back to home page
           </Button>
         </Link>

@@ -15,7 +15,11 @@ const Home: NextPage = () => {
       <Box sx={{ flexGrow: 1 }} p={1}>
         <h1>Hello, {user?.getUsername()}</h1>
         <Button
-          sx={{ marginLeft: "20px", border: "1px solid #2078db" }}
+          sx={{
+            marginLeft: "20px",
+            border: "1px solid #2078db",
+            textTransform: "none"
+          }}
           onClick={() => signOut()}
         >
           Sign out
@@ -23,7 +27,13 @@ const Home: NextPage = () => {
       </Box>
       <Box sx={{ flexGrow: 1 }} p={1}>
         <Link href={"/products"} passHref>
-          <Button sx={{ marginLeft: "20px", border: "1px solid #2078db" }}>
+          <Button
+            sx={{
+              marginLeft: "20px",
+              border: "1px solid #2078db",
+              textTransform: "none"
+            }}
+          >
             Product list
           </Button>
         </Link>

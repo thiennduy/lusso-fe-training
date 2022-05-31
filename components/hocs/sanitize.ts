@@ -8,4 +8,6 @@ if (typeof window !== "undefined") {
   const purify = (window as unknown as IDOMPurifyWindow)?.DOMPurify || DOMPurify
 }
 
-export const sanitize = (html: string): string => DOMPurify.sanitize(html)
+const sanitize = (html: string): string => DOMPurify.sanitize(html)
+
+export default sanitize

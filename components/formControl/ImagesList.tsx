@@ -48,7 +48,10 @@ function ImagesList(props: ProductImagesPropsSchema) {
   return (
     <>
       <input type='file' multiple accept='image/*' {...register("image")} />
-      <Button onClick={onAddImage} sx={{ border: "2px solid #208be6" }}>
+      <Button
+        onClick={onAddImage}
+        sx={{ border: "2px solid #208be6", textTransform: "none" }}
+      >
         Add image
       </Button>
       <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>

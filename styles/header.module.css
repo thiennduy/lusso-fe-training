@@ -69,12 +69,20 @@
     font-size: 15px;
     margin: 0;
 }
+    .account__action:hover {
+        cursor: pointer;
+        color: #a03a8d;
+    }
 .account__manage {
     font-weight: 700;
     color: white;
     font-size: 15px;
     margin: 10px 0 0 0;
 }
+    .account__manage:hover {
+        cursor: pointer;
+        color: #cac6c6;
+    }
 .account__icon {
     display: none;
 }

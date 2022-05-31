@@ -10,7 +10,7 @@ import styles from "styles/product-detail.module.css"
 import axios from "axios"
 import escapeHtml from "escape-html"
 import { Text, Node, Transforms, Element } from "slate"
-import { sanitize } from "components/hocs/sanitize"
+import sanitize from "components/hocs/sanitize"
 
 const strengthImage = [
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-01.png?v=1629845765",
@@ -53,7 +53,6 @@ const serialize = (node: any) => {
 
 function ProductDetail(props: any) {
   const { data } = props
-  // console.log(DOMPurify)
   const descriptionString = data.description.reduce((accum: any, html: any) => {
     accum = accum + serialize(html)
     return accum
@@ -139,8 +138,10 @@ function ProductDetail(props: any) {
                   <EmailIcon className={styles.network__icon} />
                 </Box>
                 <Typography className={styles.description__content}>
-                  FREE delivery between Friday, May. 27 and Thursday, Jun.
-                  02.Select Lighting Options: Non-Lit (NO RGB) +$0.00
+                  FREE delivery between Friday, May. 27 and Thursday, Jun. 02.
+                </Typography>
+                <Typography className={styles.description__content}>
+                  Select Lighting Options: Black-Lit (RGB) +$50.00
                 </Typography>
                 <Typography className={styles.description__content}>
                   Order within 14 hours, 46 minutes and 53 seconds

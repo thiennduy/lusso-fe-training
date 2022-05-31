@@ -26,7 +26,7 @@
     height: 60vh;
 }
 .detailbox {
-    padding: 10px 20px;
+    padding: 10px 30px;
     margin-left: 50px;
     background-color: #181616;
     border: 1px solid #252525;
@@ -49,6 +49,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin: 10px 0px;
 }
 .strengthImage {
     width: 50%;
@@ -137,15 +138,15 @@
     font-size: 30px;
     font-weight: 500;
     color: white;
-    margin-bottom: 20px;
 }
 .description__content {
-    align-items: center;
+    /* align-items: center; */
     line-height: 38px;
     font-size: 16px;
+    text-align: justify;
 }
 .description__card {
-    padding: 20px;
+    padding: 20px 40px;
     background-color: #181616;
     border: 1px solid #252525;
     border-radius: 4px;
@@ -200,7 +201,8 @@
     background-color: #1d1969;
     border-radius: none;
     width: 200px;
-    font-size: 15px;
+    font-size: 18px;
+    text-transform: none;
 }
 .addButton:hover {
     background-color: #231f7a;
