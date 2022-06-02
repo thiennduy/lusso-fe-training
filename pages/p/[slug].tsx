@@ -18,45 +18,9 @@ const strengthImage = [
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-03.png?v=1629845765",
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-04.png?v=1629845765g"
 ]
-const serialize = (node: any) => {
-  if (Text.isText(node)) {
-    let string = escapeHtml(node.text)
-    if (node?.bold) {
-      string = `<strong>${string}</strong>`
-    } else if (node?.italic) {
-      string = `<i>${string}</i>`
-    } else if (node?.underline) {
-      string = `<u>${string}</u>`
-    } else if (node?.code) {
-      string = `<code><${string}></code>`
-    }
-    return string
-  }
-
-  const children = node.children?.map((n: any) => serialize(n)).join("")
-
-  switch (node.type) {
-    case "quote":
-      return `<blockquote><p>${children}</p></blockquote>`
-    case "paragraph":
-      return `<p>${children}</p>`
-    case "link":
-      return `<a href="${escapeHtml(node.url)}">${children}</a>`
-    case "heading-one":
-      return `<h1>${children}</h1>`
-    case "heading-two":
-      return `<h2>${children}</h2>`
-    default:
-      return children
-  }
-}
 
 function ProductDetail(props: any) {
   const { data } = props
-  const descriptionString = data.description.reduce((accum: any, html: any) => {
-    accum = accum + serialize(html)
-    return accum
-  }, "")
   const images = data?.images
   const [bigImage, setBigImage] = useState({
     host: images[0].host,
@@ -79,7 +43,7 @@ function ProductDetail(props: any) {
           backgroundColor: "black",
           color: "rgb(131, 130, 130)",
           minHeight: "80vh",
-          margin: "50px 0"
+          padding: "50px 0"
         }}
       >
         {!data ? (
@@ -102,8 +66,8 @@ function ProductDetail(props: any) {
                       >
                         <Image
                           src={item.host + item.key}
-                          height='80px'
-                          width='80px'
+                          height='90px'
+                          width='90px'
                           alt='item images'
                           onClick={() =>
                             setBigImage({ host: item.host, key: item.key })
@@ -126,8 +90,8 @@ function ProductDetail(props: any) {
                 <Typography className={styles.product__name}>
                   {data.name.en}
                 </Typography>
-                <Box className={styles.detail__save}>
-                  <Typography className={styles.detail__saveContent}>
+                <Box className={styles.detail__content}>
+                  <Typography className={styles["detail__content--save"]}>
                     Save ${save}
                   </Typography>
                 </Box>
@@ -149,9 +113,9 @@ function ProductDetail(props: any) {
                 <Typography className={styles.description__content}>
                   Select Lighting Options: Non-Lit (NO RGB) +$0.00
                 </Typography>
-                <Box className={(styles.option, styles.optionActive)}>
+                <Box className={(styles.option, styles["option--active"])}>
                   <Typography
-                    className={(styles.option__text, styles.textActive)}
+                    className={(styles.option__text, styles["text--active"])}
                   >
                     17.5 x 24 inches
                   </Typography>
@@ -188,17 +152,17 @@ function ProductDetail(props: any) {
                     </button>
                   </Box>
                 </Box>
-                <Button className={styles.addButton} variant='contained'>
+                <Button className={styles.add__button} variant='contained'>
                   Add to card
                 </Button>
               </Box>
-              <Box className={styles.descriptionWrapper}>
-                <Box className={styles.strengthImages}>
+              <Box className={styles.description__wrapper}>
+                <Box className={styles.strength__images}>
                   {strengthImage.map((item, index) => (
                     <img
                       src={item}
                       key={index}
-                      className={styles.strengthImage}
+                      className={styles.strength__image}
                       alt='index'
                     />
                   ))}
@@ -209,7 +173,7 @@ function ProductDetail(props: any) {
                   </Typography>
                   <Box
                     dangerouslySetInnerHTML={{
-                      __html: sanitize(descriptionString)
+                      __html: sanitize(data.descriptionString)
                     }}
                     className={styles.description__content}
                   ></Box>
@@ -250,14 +214,53 @@ type getServerSidePropsType = {
 
 export async function getServerSideProps(props: getServerSidePropsType) {
   const { params } = props
+  const serialize = (node: any) => {
+    if (Text.isText(node)) {
+      let string = escapeHtml(node.text)
+      if (node?.bold) {
+        string = `<strong>${string}</strong>`
+      } else if (node?.italic) {
+        string = `<i>${string}</i>`
+      } else if (node?.underline) {
+        string = `<u>${string}</u>`
+      } else if (node?.code) {
+        string = `<code><${string}></code>`
+      }
+      return string
+    }
+
+    const children = node.children?.map((n: any) => serialize(n)).join("")
+
+    switch (node.type) {
+      case "quote":
+        return `<blockquote><p>${children}</p></blockquote>`
+      case "paragraph":
+        return `<p>${children}</p>`
+      case "link":
+        return `<a href="${escapeHtml(node.url)}">${children}</a>`
+      case "heading-one":
+        return `<h1>${children}</h1>`
+      case "heading-two":
+        return `<h2>${children}</h2>`
+      default:
+        return children
+    }
+  }
 
   try {
     const res = await axios.get(`products/${params.slug}`)
     console.log("res: ", res.data)
+    const descriptionString = res.data.description.reduce(
+      (accum: any, html: any) => {
+        accum = accum + serialize(html)
+        return accum
+      },
+      ""
+    )
 
     return {
       props: {
-        data: res.data
+        data: { ...res.data, descriptionString }
       }
     }
   } catch (error) {

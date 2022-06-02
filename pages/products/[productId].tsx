@@ -1,6 +1,6 @@
-import { useForm, FormProvider, useWatch } from "react-hook-form"
+import { useForm, FormProvider } from "react-hook-form"
 import { debounce } from "@mui/material/utils"
-import { useState, useEffect, useCallback } from "react"
+import { useEffect, useCallback } from "react"
 import axios from "axios"
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
@@ -8,24 +8,19 @@ import {
   InputField,
   BrandName,
   DatePicker,
-  ImageItem,
   ImagesList,
   InputSlug,
   NumberField,
   RichText,
-  SelectField,
-  Serialize
+  SelectField
 } from "components/formControl/index"
 
 import { useRouter } from "next/router"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import ProductPage from "./index"
 import ProductLayout from "components/ProductLayout"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import { BorderRight } from "@mui/icons-material"
-import { Button } from "@mui/material"
 
 function slugify(text: string) {
   return text

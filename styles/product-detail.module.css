@@ -16,7 +16,7 @@
     margin-left: 0px;
     display: flex;
     flex-wrap: nowrap;
-    padding: 20px 10px;
+    padding: 20px 20px;
     background-color: #181616;
     border: 1px solid #252525;
     border-radius: 4px;
@@ -40,10 +40,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
-    flex-wrap: wrap;
+    /* align-content: space-between; */
+    overflow-y: scroll;
+    /* min-height: 1000px; */
+    /* flex-wrap: wrap; */
 }
-.strengthImages {
+.imagelist::-webkit-scrollbar {
+    display: none;
+}
+.strength__images {
     /* margin-left: 20px; */
     /* width: 30%; */
     display: flex;
@@ -51,7 +56,7 @@
     width: 100%;
     margin: 10px 0px;
 }
-.strengthImage {
+.strength__image {
     width: 50%;
     height: auto;
 }
@@ -71,14 +76,18 @@
 .small__image {
     /* margin-bottom: 20px; */
     /* height: auto; */
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
+    margin-bottom: 20px;
 }
+/* .small__image:last-child {
+    margin-bottom: 0 !important;
+} */
 .active__image {
     border: 2px solid #ad2b95;
     border-radius: 3px;
 }
-.detail__save {
+.detail__content {
     background-color: #cf0e0e;
     color: white;
     width: 90px;
@@ -89,7 +98,7 @@
     border-radius: 3px;
     margin: 10px 0;
 }
-.detail__saveContent {
+.detail__content--save {
     font-size: 15px;
     font-weight: 700;
 }
@@ -114,7 +123,7 @@
     font-weight: 400;
     color: #af1091;
 }
-.optionActive {
+.option--active {
     width: 200px;
     margin-top: 10px;
     margin-right: 20px;
@@ -125,7 +134,7 @@
     border-radius: 3px;
     border: 2px solid #2b2828;
 }
-.textActive {
+.text--active {
     font-size: 18px;
     font-weight: 400;
     color: #646363;
@@ -194,7 +203,7 @@
     border: 1px solid #252525;
 }
 
-.addButton {
+.add__button {
     height: 50px;
     margin-top: 25px;
     color: white;
@@ -204,10 +213,10 @@
     font-size: 18px;
     text-transform: none;
 }
-.addButton:hover {
+.add__button:hover {
     background-color: #231f7a;
 }
-.descriptionWrapper {
+.description__wrapper {
     /* margin-top: 50px; */
     width: 48%;
 }
