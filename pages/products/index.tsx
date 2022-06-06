@@ -161,7 +161,4 @@ function ProductPage({ children }: any) {
     </Box>
   )
 }
-ProductPage.getLayout = function getLayout(page: any) {
-  return <Layout>{page}</Layout>
-}
 export default memo(ProductPage)

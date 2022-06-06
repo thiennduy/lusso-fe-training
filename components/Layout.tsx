@@ -6,13 +6,13 @@ export default function Layout({ children }: any) {
   return (
     <>
       <Header />
+      <Message />
       <main
         style={{
           minHeight: "1000px",
           backgroundColor: "white"
         }}
       >
-        <Message />
         {children}
       </main>
       <Footer />

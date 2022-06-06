@@ -22,7 +22,7 @@ function Message({}: any) {
     welcomeProps = {
       id: list.length,
       icon: <InfoIcon />,
-      backgroundColor: "#0073bb",
+      backgroundColor: "#b3e6f5",
       title: "Welcome to the new Amazon Cognito console",
       description:
         "We have redesigned the Amazon Cognito user pools console to make it easier to use. The new layouts and workflows are optimized for faster access to relevant infomation. Learn more about changes and let us know what you think. Or you can switch back to the old console"
@@ -33,7 +33,7 @@ function Message({}: any) {
     welcomeProps = {
       id: list.length,
       icon: <CheckCircleIcon />,
-      backgroundColor: "#1d8102",
+      backgroundColor: "#b7f7c4",
       title: `User access for 'phuong.pham' has been ${
         status === true ? "disabled" : "enabled"
       } successfully`
@@ -42,7 +42,7 @@ function Message({}: any) {
     setList([...list, welcomeProps])
   }
   return (
-    <>
+    <Box sx={{ backgroundColor: "white" }}>
       <TestMessage list={list} setList={setList} />
       <Box sx={{ position: "absolute", bottom: "0", left: "0" }}>
         <Button onClick={addWelcomeMessage}>Welcome</Button>
@@ -50,7 +50,7 @@ function Message({}: any) {
           {status === true ? "Disable" : "Enabled"}
         </Button>
       </Box>
-    </>
+    </Box>
   )
 }
 

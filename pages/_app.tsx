@@ -17,6 +17,7 @@ import { theme } from "utils/theme"
 import { NextPageWithLayout } from "types"
 import ErrorBoundary from "components/ErrorBoundary"
 import { AuthProvider } from "contexts/auth"
+import Message from "components/Message"
 
 Auth.configure({
   userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOLS_ID,

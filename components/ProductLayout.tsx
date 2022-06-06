@@ -6,5 +6,4 @@ function ProductLayout({ children }: any) {
   return <ProductPage>{children}</ProductPage>
 }
 
-
 export default ProductLayout

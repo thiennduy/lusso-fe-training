@@ -28,12 +28,17 @@ function TestMessage({ list, setList }: Props) {
     const updateToast = list.filter((e) => e.id !== id)
     setList(updateToast)
   }
+  // setTimeout(() => {
+  //   if (list.length) {
+  //     setList([])
+  //   }
+  // }, 4000)
   useEffect(() => {
     const interval = setInterval(() => {
       if (list.length) {
         deleteToast(list[0].id)
       }
-    }, 500)
+    }, 750)
     return () => {
       clearInterval(interval)
     }
@@ -46,10 +51,11 @@ function TestMessage({ list, setList }: Props) {
           sx={{
             width: "100%",
             backgroundColor: toast.backgroundColor,
-            color: "white",
+            color: "black",
             position: "relative",
             padding: "10px 5px",
-            border: "0.5px solid white"
+            border: "0.5px solid white",
+            borderRadius: "5px"
           }}
         >
           <Box>
@@ -76,11 +82,9 @@ function TestMessage({ list, setList }: Props) {
             >
               <CloseIcon
                 sx={{
-                  border: "1px solid white",
-                  borderRadius: "50px",
                   fontSize: "20px",
                   padding: "2px",
-                  color: "white"
+                  color: "black"
                 }}
               />
             </Button>
