@@ -11,6 +11,7 @@ import axios from "axios"
 import escapeHtml from "escape-html"
 import { Text, Node, Transforms, Element } from "slate"
 import sanitize from "components/hocs/sanitize"
+import { SnackbarProvider } from "notistack"
 
 const strengthImage = [
   "https://cdn.shopify.com/s/files/1/0552/1735/6962/files/KOL_ICONS-01.png?v=1629845765",

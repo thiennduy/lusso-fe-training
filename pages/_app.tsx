@@ -7,11 +7,11 @@ import Auth from "@aws-amplify/auth"
 import { RecoilRoot } from "recoil"
 import { SnackbarProvider } from "notistack"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
+import SnackbarButton from "components/formControl/SnackbarButton"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import { ThemeProvider } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
-
+import SnackbarContainer from "components/formControl/SnackbarContainer"
 import { initiateAxios } from "utils"
 import { theme } from "utils/theme"
 import { NextPageWithLayout } from "types"
@@ -50,7 +50,7 @@ const App: React.FC<AppProps> = ({
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SnackbarProvider>
+        <SnackbarContainer maxSnack={3} dense>
           <ErrorBoundary>
             <AuthProvider>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -58,7 +58,7 @@ const App: React.FC<AppProps> = ({
               </LocalizationProvider>
             </AuthProvider>
           </ErrorBoundary>
-        </SnackbarProvider>
+        </SnackbarContainer>
       </ThemeProvider>
     </RecoilRoot>
   )

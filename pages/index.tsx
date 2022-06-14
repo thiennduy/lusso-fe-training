@@ -5,6 +5,8 @@ import { useUser } from "../hooks/user"
 import { Box, InputBase, Button } from "@mui/material"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import MyApp from "components/formControl/TestNotistack"
+import { SnackbarProvider } from "notistack"
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -12,7 +14,7 @@ const Home: NextPage = () => {
 
   return (
     <React.Fragment>
-      <Box sx={{ flexGrow: 1 }} p={1}>
+      <Box sx={{ flexGrow: 1, position: "relative" }} p={1}>
         <h1>Hello, {user?.getUsername()}</h1>
         <Button
           sx={{
