@@ -21,6 +21,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import ProductLayout from "components/ProductLayout"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
+import Convert from "components/formControl/Convert"
 
 function slugify(text: string) {
   return text
@@ -60,8 +61,42 @@ const dimensionOptions = [
     label: "meters"
   }
 ]
+const editorjsValue = {
+  time: 1655699756061,
+  blocks: [
+    {
+      id: "YVHEV5ppxa",
+      type: "paragraph",
+      data: {
+        text: "<i>Chảo chống dính&nbsp;Michelangelo</i>&nbsp;có thiết kế sang trọng, kiểu dáng hiện đại, phù hợp với mọi căn bếp. <b>Chảo có chất liệu cao cấp và công nghệ đúc tiên tiến</b> giúp dẫn nhiệt tốt. <b>Chất liệu: Nhôm</b> và lớp phủ cao cấp từ&nbsp;Whitford giúp chảo rất chắc chắn và bền bỉ, <i>dẫn nhiệt đều và nhanh.</i>"
+      }
+    },
+    {
+      id: "30_0qTzw-P",
+      type: "header",
+      data: {
+        text: "THÔNG TIN SẢN PHẨM",
+        level: 2
+      }
+    },
+    {
+      id: "NMJg4mRvlz",
+      type: "list",
+      data: {
+        style: "unordered",
+        items: [
+          "Kích thước: 28 cm, phù hợp với nhu cầu sử dụng của gia đình.",
+          "Kích thước: 29 cm, phù hợp với nhu cầu sử dụng của gia đình.",
+          "Kích thước: 30 cm, phù hợp với nhu cầu sử dụng của gia đình."
+        ]
+      }
+    }
+  ]
+}
 
 function AddForm() {
+  const slatejsValue = Convert(editorjsValue)
+  console.log("Value cua SlateJS day ne:", slatejsValue)
   const router = useRouter()
   const _id: any =
     router.query.productId === "new" ? "" : router.query.productId?.toString()
@@ -120,13 +155,14 @@ function AddForm() {
     if (!_id) return
     try {
       const res = await axios.get(`admin/products/${_id}`)
-      console.log("Test: ", res.data)
+      console.log("Test: ", res.data.description)
       methods.reset(res.data)
     } catch (error) {
       console.log(error)
     }
   }
   const onSubmit = async (data: any) => {
+    console.log(data.description)
     try {
       if (_id === "") {
         await axios.post("admin/products", data)

@@ -26,6 +26,35 @@ const Login = () => {
       enqueueSnackbar(error.message)
     }
   }
+  const signUp = useCallback(
+    async (input: RequestSignUpData) => {
+      const phone_number = phoneRegex(input.phone_number)
+      const result = await Auth.signUp({
+        username: input.username,
+        password: input.password,
+        attributes: {
+          email: input.email,
+          family_name: input.first_name,
+          given_name: input.last_name,
+          phone_number
+        },
+        clientMetadata: {
+          userPoolId
+        }
+      }).catch((e: any) => {
+        let text = "PreSignUp failed with error 1."
+        if (e.message === text) {
+          enqueueSnackbar("Phone number already exists", { variant: "error" })
+        }
+      })
+      // if (result.user) {
+      //   setUser(result.user)
+      //   return result.user
+      // }
+      return result
+    },
+    [setUser]
+  )
 
   return (
     <form onSubmit={handSubmit}>

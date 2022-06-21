@@ -48,7 +48,7 @@ export default function BrandName({ label, name, control }: BrandNameProps) {
         }
       }
       const res = await axios.post("admin/brands/list", data)
-      console.log("res: ", res.data.docs)
+      // console.log("res: ", res.data.docs)
       setOptions(res.data.docs)
     } catch (error) {
       console.log("Fetch brands error: ", error)

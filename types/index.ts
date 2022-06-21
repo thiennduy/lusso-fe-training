@@ -1,6 +1,6 @@
 import { NextPage } from "next"
 import { ReactElement, ReactNode } from "react"
-import {CognitoUser} from "@aws-amplify/auth";
+import { CognitoUser } from "@aws-amplify/auth"
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode

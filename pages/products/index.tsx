@@ -92,7 +92,7 @@ function ProductPage({ children }: any) {
       setProducts(res.docs)
     })
   }, [pageNum, pageSize])
-  console.log(products)
+  // console.log(products)
   return (
     <Box
       sx={{

@@ -1,7 +1,7 @@
-import {useContext, useEffect} from 'react'
-import {AuthContext} from "contexts/auth";
-import {AuthState} from "types";
-import {useRouter} from "next/router";
+import { useContext, useEffect } from "react"
+import { AuthContext } from "contexts/auth"
+import { AuthState } from "types"
+import { useRouter } from "next/router"
 
 type UseUserOptions = {
   redirectTo?: string
@@ -13,9 +13,9 @@ export const useUser = (options: UseUserOptions = {}): AuthState => {
 
   useEffect(() => {
     if (options.redirectTo) {
-      if (!(user || isLoading)) router.replace(options.redirectTo);
+      if (!(user || isLoading)) router.replace(options.redirectTo)
     }
-  }, [user, isLoading]);
+  }, [user, isLoading])
 
   return authContext
 }

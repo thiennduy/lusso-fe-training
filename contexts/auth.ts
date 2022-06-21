@@ -3,6 +3,59 @@ import { AuthState } from "types"
 import Auth, { CognitoUser } from "@aws-amplify/auth"
 import { useSnackbar } from "notistack"
 import { useRouter } from "next/router"
+import {
+  AdminDeleteUserCommand,
+  CognitoIdentityProviderClient,
+  ListUsersCommand,
+  AdminGetUserCommand
+} from "@aws-sdk/client-cognito-identity-provider"
+
+// exports.handler = async (event, context, callback: Function) => {
+//   const { userAttributes, clientMetadata } = event.request
+//   const { userPoolId } = clientMetadata
+//   const region = userPoolId.split("_")[0]
+//   // foo
+//   const client = new CognitoIdentityProviderClient({
+//     region
+//   })
+//   // let command = new ListUsersCommand({
+//   //   UserPoolId: userPoolId,
+//   //   Filter: `phone_number='${userAttributes.phone_number}'`
+//   // })
+
+//   // let result = await client.send(command)
+
+//   // if (result && Array.isArray(result.Users) && result.Users.length) {
+//   //     const error = new Error(1)
+
+//   //     return callback(error, event);
+//   // }
+//   let command = new ListUsersCommand({
+//     UserPoolId: userPoolId,
+//     Filter: `email='${userAttributes.email}'`
+//   })
+
+//   let result = await client.send(command)
+
+//   if (result && Array.isArray(result.Users) && result.Users.length) {
+//     let getUserCommand = new AdminGetUserCommand({
+//       Username: result.Users[0].Username,
+//       UserPoolId: userPoolId
+//     })
+//     let resultUserCheck = await client.send(getUserCommand)
+//     if (resultUserCheck.UserStatus === "UNCONFIRMED" || "ARCHIVED") {
+//       let deleteUserCommand = new AdminDeleteUserCommand({
+//         Username: result.Users[0].Username,
+//         UserPoolId: userPoolId
+//       })
+//       await client.send(deleteUserCommand)
+//     } else {
+//       const error = new Error(2)
+//       return callback(error, event)
+//     }
+//   }
+//   callback(null, event)
+// }
 
 export const AuthContext = React.createContext<AuthState>({
   user: null,
@@ -66,7 +119,6 @@ export const AuthProvider = ({ children }: AuthProps) => {
     },
     [setUser]
   )
-
   const signOut = useCallback(async () => {
     const result = await Auth.signOut()
     setUser(null)

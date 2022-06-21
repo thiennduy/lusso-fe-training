@@ -37,7 +37,7 @@ const RichText = (props) => {
   const renderLeaf = useCallback((props) => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
-  console.log("cccc: ", value)
+  // console.log("cccc: ", value)
 
   return (
     <>
