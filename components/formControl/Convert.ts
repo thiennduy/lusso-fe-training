@@ -45,6 +45,12 @@ const convertTextValue = (editorjs: any) => {
         children: splitHtml(item.replaceAll("&nbsp;", " "))
       }))
       return { type: "bulleted-list", children: itemsList }
+    } else if (block.type === "image") {
+      return {
+        type: "image",
+        url: block.data.file.url,
+        children: [{ text: block.data.caption }]
+      }
     }
   })
 

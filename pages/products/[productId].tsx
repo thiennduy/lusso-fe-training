@@ -21,7 +21,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import ProductLayout from "components/ProductLayout"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import Convert from "components/formControl/Convert"
+import convertTextValue from "components/formControl/Convert"
 
 function slugify(text: string) {
   return text
@@ -62,45 +62,83 @@ const dimensionOptions = [
   }
 ]
 const editorjsValue = {
-  time: 1655699756061,
+  time: 1655868648780,
   blocks: [
     {
-      id: "YVHEV5ppxa",
-      type: "paragraph",
+      id: "OOagCv7b3a",
+      type: "image",
       data: {
-        text: "<i>Chảo chống dính&nbsp;Michelangelo</i>&nbsp;có thiết kế sang trọng, kiểu dáng hiện đại, phù hợp với mọi căn bếp. <b>Chảo có chất liệu cao cấp và công nghệ đúc tiên tiến</b> giúp dẫn nhiệt tốt. <b>Chất liệu: Nhôm</b> và lớp phủ cao cấp từ&nbsp;Whitford giúp chảo rất chắc chắn và bền bỉ, <i>dẫn nhiệt đều và nhanh.</i>"
+        file: {
+          url: "https://lati.s3.ap-southeast-1.amazonaws.com/2022/5/16/medium_null_4g5aDsbDI.jpg",
+          name: "8bda3737-b2ae-4f96-a362-3eb78be09eeb.__CR0,0,600,180_PT0_SX600_V1___.jpg",
+          _id: "62822a140346ad001cf3b4ad"
+        },
+        caption: "",
+        withBorder: false,
+        stretched: false,
+        withBackground: false
       }
     },
     {
-      id: "30_0qTzw-P",
+      id: "CvlnAk93ML",
+      type: "paragraph",
+      data: {
+        text: "<b>Chảo chống dính&nbsp;Michelangelo&nbsp;có thiết kế</b> sang trọng, kiểu dáng hiện đại, phù hợp với mọi căn bếp. Chảo có chất liệu cao cấp và <i>công nghệ đúc tiên tiến giúp dẫn nhiệt tốt</i>.&nbsp;Chảo chống dính Michelangelo có thiết kế sang trọng, kiểu dáng hiện đại, phù hợp với mọi căn bếp. <b>Chảo có chất liệu cao cấp</b> và công nghệ đúc tiên <i>tiến giúp dẫn nhiệt tốt.</i>"
+      }
+    },
+    {
+      id: "OExAWFhO6u",
       type: "header",
       data: {
         text: "THÔNG TIN SẢN PHẨM",
-        level: 2
+        level: 3
       }
     },
     {
-      id: "NMJg4mRvlz",
+      id: "AQsdnirdcE",
+      type: "list",
+      data: {
+        style: "unordered",
+        items: ["Kích thước: 25 cm, phù hợp với nhu cầu sử dụng của gia đình."]
+      }
+    },
+    {
+      id: "1jCnKFeBh5",
       type: "list",
       data: {
         style: "unordered",
         items: [
-          "<b>Chất liệu</b>: Nhôm và lớp phủ cao cấp từ&nbsp;Whitford giúp chảo rất chắc chắn và bền bỉ, <i>dẫn nhiệt đều và nhanh.</i>",
-          "Dùng cho <i>tất cả các loại bếp.</i>",
-          "<b>Dùng được </b>với máy rửa chén.",
-          "Không dùng được trong lò nướng.",
-          "Tay cầm bakelite dễ cầm nắm, chắc chắn, thoải mái và cách nhiệt.",
+          "<i>Chất liệu</i>: Nhôm đúc và lớp phủ bằng gốm <b>siêu bền, dẫn nhiệt nhanh và đều với khả năng kiểm</b> soát nhiệt độ chính xác.",
+          "Dùng cho tất cả các loại bếp.",
+          "Dùng được với máy rửa chén,&nbsp;lò nướng có nhiệt độ lên đến 232°C (nắp chảo không dùng được trong lò nướng)",
+          "Tay cầm được bo tròn và rỗng bên trong để cầm nắm chắc chắn, thoải mái và cách nhiệt.",
           "Chảo chống dính Michelangelo không chứa PFAS, PFOA, chì và cadmium.",
           "Nắp kính chịu nhiệt giúp quan sát thực phẩm trong chảo dễ dàng hơn.",
           "Với công nghệ Đức, đáy chảo 3 lớp bền bỉ giúp phân bổ nhiệt đều và chống cong vênh tốt hơn."
         ]
       }
+    },
+    {
+      id: "5TdM5d_FW3",
+      type: "image",
+      data: {
+        file: {
+          url: "https://lati.s3.ap-southeast-1.amazonaws.com/2022/5/16/medium_null_j7ScAyRqz7.jpg",
+          name: "08c32c88-6485-428a-b5a1-3db7283ffc25.__CR0,0,970,300_PT0_SX970_V1___.jpg",
+          _id: "62822a150346ad001cf3b4b3"
+        },
+        caption: "Chảo chống dính Michelangelo",
+        withBorder: false,
+        stretched: false,
+        withBackground: false
+      }
     }
-  ]
+  ],
+  version: "2.22.2"
 }
 
 function AddForm() {
-  const slatejsValue = Convert(editorjsValue)
+  const slatejsValue = convertTextValue(editorjsValue)
   console.log("Value cua SlateJS day ne:", slatejsValue)
   const router = useRouter()
   const _id: any =
