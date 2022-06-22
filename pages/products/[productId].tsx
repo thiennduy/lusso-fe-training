@@ -85,9 +85,14 @@ const editorjsValue = {
       data: {
         style: "unordered",
         items: [
-          "Kích thước: 28 cm, phù hợp với nhu cầu sử dụng của gia đình.",
-          "Kích thước: 29 cm, phù hợp với nhu cầu sử dụng của gia đình.",
-          "Kích thước: 30 cm, phù hợp với nhu cầu sử dụng của gia đình."
+          "<b>Chất liệu</b>: Nhôm và lớp phủ cao cấp từ&nbsp;Whitford giúp chảo rất chắc chắn và bền bỉ, <i>dẫn nhiệt đều và nhanh.</i>",
+          "Dùng cho <i>tất cả các loại bếp.</i>",
+          "<b>Dùng được </b>với máy rửa chén.",
+          "Không dùng được trong lò nướng.",
+          "Tay cầm bakelite dễ cầm nắm, chắc chắn, thoải mái và cách nhiệt.",
+          "Chảo chống dính Michelangelo không chứa PFAS, PFOA, chì và cadmium.",
+          "Nắp kính chịu nhiệt giúp quan sát thực phẩm trong chảo dễ dàng hơn.",
+          "Với công nghệ Đức, đáy chảo 3 lớp bền bỉ giúp phân bổ nhiệt đều và chống cong vênh tốt hơn."
         ]
       }
     }

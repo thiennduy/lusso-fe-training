@@ -10,7 +10,7 @@ import {
   AdminGetUserCommand
 } from "@aws-sdk/client-cognito-identity-provider"
 
-// exports.handler = async (event, context, callback: Function) => {
+// exports.handler = async (event: any, context: any, callback: Function) => {
 //   const { userAttributes, clientMetadata } = event.request
 //   const { userPoolId } = clientMetadata
 //   const region = userPoolId.split("_")[0]

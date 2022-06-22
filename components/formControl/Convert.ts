@@ -9,46 +9,46 @@ const splitHtml = (html: string) => {
       let nodeList = [].slice?.call(parsed.body.childNodes)
       const array = nodeList.map((child: any) => {
         if (child?.data) {
-          return child.data.replaceAll("&nbsp;", " ")
+          return child.data
         } else {
-          return child.outerHTML.replaceAll("&nbsp;", " ")
+          return child.outerHTML
         }
       })
-      return array
-    }
-  }
-}
-
-const Convert = (editorjs: any) => {
-  const slatejs = editorjs.blocks.map((block: any, index: number) => {
-    if (block.type === "paragraph") {
-      let editorjsText = splitHtml(block.data.text)
-      const childrenArray = editorjsText?.map((child: any) => {
+      const nodes = array.map((child: any) => {
         if (child.includes("<b>")) {
-          return { bold: true, text: child.slice(3, child.length - 4) }
+          return { text: child.slice(3, child.length - 4), bold: true }
         } else if (child.includes("<i>")) {
-          return { italic: true, text: child.slice(3, child.length - 4) }
+          return { text: child.slice(3, child.length - 4), italic: true }
         } else {
           return { text: child }
         }
       })
-      return { type: "paragraph", children: childrenArray }
+      return nodes
+    }
+  }
+}
+
+const convertTextValue = (editorjs: any) => {
+  const slatejsValue = editorjs.blocks.map((block: any) => {
+    if (block.type === "paragraph") {
+      const childrenNodes = splitHtml(block.data.text.replaceAll("&nbsp;", " "))
+      return { type: "paragraph", children: childrenNodes }
     } else if (block.type === "header") {
       if (block.data.level === 1) {
         return { type: "heading-one", children: [{ text: block.data.text }] }
       } else {
         return { type: "heading-two", children: [{ text: block.data.text }] }
       }
-    } else if (block.type === "list") {
-      const itemsList = block.data.items.map((item: string, index: number) => ({
+    } else if (block.type === "list" && block.data.items) {
+      const itemsList = block.data.items.map((item: string) => ({
         type: "list-item",
-        children: [{ text: item }]
+        children: splitHtml(item.replaceAll("&nbsp;", " "))
       }))
       return { type: "bulleted-list", children: itemsList }
     }
   })
 
-  return slatejs
+  return slatejsValue
 }
 
-export default Convert
+export default convertTextValue
